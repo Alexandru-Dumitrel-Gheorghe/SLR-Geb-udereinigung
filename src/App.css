@@ -1,38 +1,116 @@
-.App {
-  text-align: center;
+/* Reset și box-sizing */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* Stiluri generale pentru corp */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-family, Arial, sans-serif);
+  background-color: var(--background-color, #ffffff);
+  color: var(--text-color, #333333);
+  scroll-behavior: smooth;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+/* Stilizare scrollbar pentru Webkit (Chrome, Safari) */
+body::-webkit-scrollbar {
+  width: 12px;
+}
+
+body::-webkit-scrollbar-track {
+  background: var(--background-color, #ffffff);
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: var(--primary-color, #0056b3);
+  border-radius: 6px;
+  border: 3px solid var(--background-color, #ffffff);
+}
+
+body::-webkit-scrollbar-thumb:hover {
+  background-color: #004494; /* O nuanță mai închisă a culorii primare */
+}
+
+/* Stilizare scrollbar pentru Firefox */
+body {
+  scrollbar-width: thin;
+  scrollbar-color: var(--primary-color, #0056b3)
+    var(--background-color, #ffffff);
+}
+
+/* Media Queries pentru responsivitate */
+@media (max-width: 1200px) {
+  body {
+    font-size: 16px;
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+@media (max-width: 992px) {
+  body {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 768px) {
+  body {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 576px) {
+  body {
+    font-size: 13px;
+  }
+}
+
+/* Alte stiluri responsiv */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    height: 60px;
+  }
+}
+
+/* Exemplu de folosire a variabilelor în alte elemente */
+.header {
+  background-color: var(--primary-color);
+  height: var(--navbar-height);
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  color: var(--light-text-color);
 }
 
-.App-link {
-  color: #61dafb;
+/* Alte componente stilizate */
+.button {
+  background-color: var(--secondary-color);
+  color: var(--text-color);
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color var(--transition-speed);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
+.button:hover {
+  background-color: darken(var(--secondary-color), 10%);
+}
+
+/* Media query pentru buton */
+@media (max-width: 576px) {
+  .button {
+    width: 100%;
+    padding: 12px;
   }
 }

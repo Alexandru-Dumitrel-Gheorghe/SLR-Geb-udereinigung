@@ -1,0 +1,149 @@
+@import "../../styles/variables.css";
+
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 1rem 2rem;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  z-index: 1000;
+}
+
+.transparent {
+  background-color: transparent;
+}
+
+.scrolled {
+  background-color: rgba(0, 70, 128, 0.95);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.logo {
+  width: 50px;
+  height: 50px;
+}
+
+.logoImage {
+  width: 100%;
+  height: auto;
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+}
+
+.logoImage:hover {
+  transform: scale(1.1);
+}
+
+.navLinks {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+.navItem {
+  list-style: none;
+}
+
+.navLink {
+  color: var(--light-text-color);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+  position: relative;
+  cursor: pointer; /* Adaugă această linie */
+}
+
+.navLink:hover,
+.navLink.active {
+  color: var(--secondary-color);
+}
+
+.navLink::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  width: 0;
+  height: 2px;
+  background-color: var(--secondary-color);
+  transition: width 0.3s ease;
+}
+
+.navLink:hover::after {
+  width: 100%;
+}
+
+.hamburger {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--light-text-color);
+  font-size: 1.8rem;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.hamburger:hover {
+  color: var(--secondary-color);
+}
+
+/* Meniu mobil */
+@media (max-width: 768px) {
+  .navLinks {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 70, 128, 0.95);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    transform: translateX(-100%);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 1000; /* Asigură-te că meniul are un z-index mai mare */
+  }
+
+  .navLinks.active {
+    transform: translateX(0);
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .hamburger {
+    display: block;
+    position: fixed; /* Asigură-te că butonul este fix */
+    top: 20px; /* Ajustează înălțimea pentru a fi vizibil */
+    right: 20px;
+    z-index: 1100; /* Setează un z-index mai mare decât meniul pentru a fi vizibil */
+    background: none;
+    border: none;
+    color: var(--light-text-color);
+    font-size: 1.8rem;
+    cursor: pointer;
+    transition: color 0.3s ease;
+  }
+
+  .hamburger:hover {
+    color: var(--secondary-color);
+  }
+
+  .navLink {
+    font-size: 1.5rem;
+    color: var(--light-text-color);
+    text-align: center;
+    cursor: pointer;
+  }
+}

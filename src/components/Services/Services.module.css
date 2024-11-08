@@ -1,0 +1,129 @@
+@import "../../styles/variables.css"; /* Importă variabilele globale */
+
+.services {
+  padding: 4rem 2rem;
+  background-color: var(--background-color);
+  position: relative;
+  overflow: hidden;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.heading {
+  font-size: 2.5rem;
+  color: var(--primary-color);
+  margin-bottom: 3rem;
+  font-family: var(--font-primary);
+  position: relative;
+}
+
+.heading::after {
+  content: "";
+  width: 100px;
+  height: 4px;
+  background-color: var(--secondary-color);
+  display: block;
+  margin: 0.5rem auto 0;
+  border-radius: 2px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.card {
+  background: linear-gradient(
+    145deg,
+    var(--light-background-color),
+    var(--container-bg)
+  );
+  padding: 2rem;
+  border-radius: 20px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  transition: transform var(--transition-speed) ease,
+    box-shadow var(--transition-speed) ease;
+  cursor: pointer;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 200%;
+  height: 200%;
+  background: var(--secondary-color);
+  transform: rotate(45deg);
+  transition: all 0.5s ease;
+  opacity: 0;
+  z-index: -1;
+}
+
+.card:hover::before {
+  opacity: 0.15;
+}
+
+.icon {
+  font-size: 2.5rem;
+  color: var(--secondary-color);
+  margin-bottom: 1rem;
+  transition: transform 0.3s ease, color var(--transition-speed) ease;
+}
+
+.title {
+  font-size: 1.5rem;
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  font-family: var(--font-secondary);
+}
+
+.description {
+  font-size: 1rem;
+  color: var(--dark-text-color);
+  line-height: 1.6;
+  text-align: left;
+}
+
+/* Hover Effects */
+.card:hover .icon {
+  color: var(--primary-color);
+  transform: scale(1.1) rotate(10deg);
+}
+
+.card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.2);
+}
+
+.card:hover .description {
+  color: var(--secondary-color);
+}
+
+/* Responsivitate */
+@media (max-width: 768px) {
+  .heading {
+    font-size: 2rem;
+  }
+
+  .description {
+    text-align: center;
+  }
+
+  .card {
+    padding: 1.5rem;
+  }
+
+  .title {
+    font-size: 1.3rem;
+  }
+}

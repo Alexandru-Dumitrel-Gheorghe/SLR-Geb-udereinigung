@@ -1,0 +1,201 @@
+@import "../../styles/variables.css";
+
+.about {
+  padding: 80px 20px;
+  background: linear-gradient(135deg, #f9fafb, #e3e8ed);
+  font-family: var(--font-primary);
+  color: var(--dark-text-color);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.heading {
+  font-size: 2.8rem;
+  color: var(--primary-color);
+  margin-bottom: 30px;
+  text-align: center;
+  font-family: var(--font-secondary);
+  position: relative;
+}
+
+.heading::after {
+  content: "";
+  width: 80px;
+  height: 4px;
+  background-color: var(--secondary-color);
+  display: block;
+  margin: 10px auto 0;
+  border-radius: 2px;
+}
+
+.content {
+  display: flex;
+  gap: 50px;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.imageContainer {
+  flex: 1;
+  min-width: 300px;
+  max-width: 500px;
+  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease;
+}
+
+.imageContainer:hover {
+  transform: scale(1.05);
+}
+
+.image {
+  width: 100%;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+.text {
+  flex: 1;
+  max-width: 600px;
+}
+
+.paragraph {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: var(--dark-text-color);
+  margin-bottom: 20px;
+}
+
+.contactInfo {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: 30px;
+}
+
+.contactItem {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  background: #ffffff;
+  padding: 15px 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.contactItem:hover {
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.contactItem:hover p {
+  color: var(--secondary-color);
+}
+
+.contactItem::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--secondary-color);
+  transition: width 0.3s ease;
+}
+
+.contactItem:hover::after {
+  width: 100%;
+}
+
+.icon {
+  font-size: 1.5rem;
+  color: var(--secondary-color);
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.contactItem:hover .icon {
+  transform: translateY(-2px) scale(1.1);
+  color: var(--primary-color);
+}
+
+.additionalInfo {
+  background: #f1f4f8;
+  padding: 40px 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  margin-top: 50px;
+  text-align: center;
+}
+
+.subHeading {
+  font-size: 1.8rem;
+  color: var(--primary-color);
+  margin-bottom: 15px;
+  font-family: var(--font-secondary);
+}
+
+.experience {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--secondary-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.leafIcon {
+  font-size: 1.5rem;
+  color: var(--primary-color);
+}
+
+@media (max-width: 768px) {
+  .heading {
+    font-size: 2.2rem;
+  }
+
+  .content {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .paragraph {
+    text-align: center;
+  }
+
+  .imageContainer {
+    max-width: 80%;
+  }
+
+  .contactInfo {
+    justify-content: center;
+  }
+
+  .subHeading {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .about {
+    padding: 60px 15px;
+  }
+
+  .heading {
+    font-size: 2rem;
+  }
+
+  .paragraph {
+    font-size: 0.95rem;
+  }
+}

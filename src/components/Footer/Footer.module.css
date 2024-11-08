@@ -1,0 +1,46 @@
+/* src/components/Footer/Footer.module.css */
+@import "../../styles/variables.css"; /* Importă variabilele globale */
+
+.footer {
+  background-color: var(--primary-color);
+  color: var(--light-text-color);
+  padding: 2rem 1rem;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.socialMedia {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.icon {
+  color: var(--light-text-color);
+  font-size: 1.5rem;
+  transition: color var(--transition-speed) ease;
+}
+
+.icon:hover {
+  color: var(--secondary-color);
+}
+
+.copy {
+  font-size: 0.9rem;
+}
+
+/* Media Queries pentru Responsivitate */
+@media (max-width: 768px) {
+  .icon {
+    font-size: 1.2rem;
+  }
+
+  .copy {
+    font-size: 0.8rem;
+  }
+}

@@ -1,23 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+// src/App.js
+import React from "react";
+import Navbar from "./components/Navbar/Navbar";
+import Hero from "./components/Hero/Hero";
+import About from "./components/About/About";
+import Mission from "./components/Mission/Mission";
+import Services from "./components/Services/Services";
+import Gallery from "./components/Gallery/Gallery";
+import Gemeinden from "./components/Gemeinden/Gemeinden"; // Importă componenta Gemeinden
+import Contact from "./components/Contact/Contact";
+import Footer from "./components/Footer/Footer";
+import ScrollToTop from "./components/scrolltotop/ScrollToTop";
+import "./App.css"; // Importă stilurile globale
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Navbar />
+      <Hero />
+      <About />
+      <Mission />
+      <Services />
+      <Gallery />
+      <Gemeinden /> {/* Include componenta Gemeinden */}
+      <Contact />
+      <Footer />
+      <ScrollToTop />
     </div>
   );
 }
