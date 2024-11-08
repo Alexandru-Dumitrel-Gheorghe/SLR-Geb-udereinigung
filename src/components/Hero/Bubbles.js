@@ -4,7 +4,7 @@ import styles from "./Bubbles.module.css";
 
 const Bubbles = () => {
   // Generăm un număr de bule
-  const bubbles = Array.from({ length: 20 });
+  const bubbles = Array.from({ length: 40 });
 
   return (
     <div className={styles.bubblesContainer}>

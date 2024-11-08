@@ -1,11 +1,15 @@
+// src/components/Hero/Hero.js
+
 import React from "react";
 import styles from "./Hero.module.css";
 import { FaPhoneAlt, FaEnvelope, FaMapMarkerAlt } from "react-icons/fa";
 import { motion } from "framer-motion";
+import Bubbles from "./Bubbles"; // Importăm componenta Bubbles
 
 const Hero = () => {
   return (
     <section className={styles.hero} id="hero">
+      <Bubbles /> {/* Adăugăm componenta Bubbles */}
       <div className={styles.overlay}></div>
       <div className={styles.content}>
         <motion.div
