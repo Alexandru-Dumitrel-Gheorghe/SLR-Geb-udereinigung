@@ -1,3 +1,4 @@
+// src/components/About/About.js
 import React from "react";
 import styles from "./About.module.css";
 import { motion } from "framer-motion";
@@ -7,15 +8,22 @@ const About = () => {
   return (
     <section id="about" className={styles.about}>
       <div className={styles.container}>
-        <motion.h2
-          className={styles.heading}
+        <motion.div
+          className={styles.header}
           initial={{ opacity: 0, y: -50 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
-          Über uns
-        </motion.h2>
+          <h2 className={styles.heading}>Über uns</h2>
+          <motion.div
+            className={styles.separator}
+            initial={{ width: 0 }}
+            whileInView={{ width: 120 }}
+            transition={{ duration: 1 }}
+            viewport={{ once: true }}
+          />
+        </motion.div>
 
         <div className={styles.content}>
           <motion.div
@@ -30,6 +38,16 @@ const About = () => {
               alt="Über uns SLR Gebäudereinigung"
               className={styles.image}
             />
+            <motion.div
+              className={styles.badge}
+              initial={{ scale: 0 }}
+              whileInView={{ scale: 1 }}
+              transition={{ duration: 0.5, delay: 0.5 }}
+              viewport={{ once: true }}
+            >
+              <FaLeaf className={styles.badgeIcon} />
+              <span>Nachhaltigkeit</span>
+            </motion.div>
           </motion.div>
 
           <motion.div
@@ -63,14 +81,34 @@ const About = () => {
             </p>
 
             <div className={styles.contactInfo}>
-              <div className={styles.contactItem}>
+              <motion.a
+                href="tel:+4915228714145"
+                className={styles.contactItem}
+                whileHover={{ scale: 1.2 }}
+                animate={{ scale: [1, 1.1, 1] }}
+                transition={{
+                  repeat: Infinity,
+                  duration: 2,
+                  ease: "easeInOut",
+                }}
+                aria-label="Telefonnummer anrufen"
+              >
                 <FaPhone className={styles.icon} />
-                <p>Mobil: +49 (0) 152 / 28714145</p>
-              </div>
-              <div className={styles.contactItem}>
+              </motion.a>
+              <motion.a
+                href="mailto:kontakt@slr-gebaeudereinigung.de"
+                className={styles.contactItem}
+                whileHover={{ scale: 1.2 }}
+                animate={{ scale: [1, 1.1, 1] }}
+                transition={{
+                  repeat: Infinity,
+                  duration: 2,
+                  ease: "easeInOut",
+                }}
+                aria-label="E-Mail senden"
+              >
                 <FaEnvelope className={styles.icon} />
-                <p>E-Mail: kontakt@slr-gebaeudereinigung.de</p>
-              </div>
+              </motion.a>
             </div>
           </motion.div>
         </div>
