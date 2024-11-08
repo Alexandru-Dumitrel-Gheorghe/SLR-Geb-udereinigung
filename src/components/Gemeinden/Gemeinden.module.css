@@ -1,109 +1,118 @@
+/* src/components/Gemeinden/Gemeinden.module.css */
+
 @import "../../styles/variables.css";
 
 .gemeinden {
-  padding: 4rem 2rem;
+  padding: 5rem 2rem;
   background: linear-gradient(135deg, var(--background-color), #e3e8ed);
+  font-family: var(--font-primary);
+  color: var(--dark-text-color);
 }
 
 .container {
-  max-width: 1200px;
+  max-width: 1300px;
   margin: 0 auto;
   text-align: center;
 }
 
 .heading {
-  font-size: 2.8rem;
+  font-size: 3rem;
   color: var(--primary-color);
-  margin-bottom: 3rem;
+  margin-bottom: 4rem;
   position: relative;
-  font-weight: 700;
   font-family: var(--font-secondary);
+  font-weight: 700;
 }
 
 .heading::after {
   content: "";
-  width: 150px;
-  height: 4px;
+  width: 100px;
+  height: 5px;
   background-color: var(--secondary-color);
   display: block;
-  margin: 0.5rem auto 0;
+  margin: 1rem auto 0;
   border-radius: 2px;
 }
 
 .cardsContainer {
   display: flex;
   justify-content: center;
-  gap: 2rem;
+  gap: 3rem;
   flex-wrap: wrap;
 }
 
 .card {
   background: var(--light-background-color);
-  border-radius: 15px;
+  border-radius: 50px;
   overflow: hidden;
-  width: 100%;
-  max-width: 550px;
+  width: 300px;
+  height: 400px;
   display: flex;
   flex-direction: column;
+  align-items: center;
   transition: transform 0.4s ease, box-shadow 0.4s ease;
   position: relative;
+  padding: 2rem 1.5rem;
 }
 
 .imageContainer {
-  width: 100%;
-  height: 250px;
+  /* Eliminăm width și height fixe */
+  aspect-ratio: 1 / 1; /* Asigurăm că containerul este pătrat */
+  width: 150px; /* Ajustăm lățimea după necesități */
+  border-radius: 50%;
   overflow: hidden;
-  position: relative;
-}
-
-.image {
-  width: 50%;
-  height: 100%;
-  object-fit: cover;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   transition: transform 0.5s ease;
 }
 
-.card:hover .image {
-  transform: scale(1.1);
+.card:hover .imageContainer {
+  transform: rotate(360deg);
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .content {
-  padding: 1.5rem;
-  text-align: left;
-  position: relative;
-  z-index: 1;
+  text-align: center;
 }
 
 .cardTitle {
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   color: var(--primary-color);
   margin-bottom: 1rem;
+  font-family: var(--font-secondary);
   font-weight: 600;
 }
 
 .cardDescription {
   font-size: 1rem;
-  color: var(--primary-color);
+  color: var(--dark-text-color);
   line-height: 1.6;
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
 }
 
 .button {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   background: var(--primary-color);
   color: #fff;
-  padding: 0.6rem 1.2rem;
-  border-radius: 8px;
+  padding: 0.8rem 1.5rem;
+  border-radius: 25px;
   text-decoration: none;
   font-size: 1rem;
   font-weight: 500;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.3s ease;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .button:hover {
   background-color: var(--secondary-color);
+  transform: translateY(-5px);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
 }
 
@@ -117,34 +126,97 @@
 }
 
 /* Responsive Design */
-@media (max-width: 768px) {
+@media (max-width: 992px) {
   .heading {
-    font-size: 2.4rem;
+    font-size: 2.5rem;
   }
 
+  .cardsContainer {
+    gap: 2rem;
+  }
+
+  .card {
+    width: 250px;
+    height: 350px;
+    padding: 1.5rem 1rem;
+  }
+
+  .imageContainer {
+    width: 120px;
+    aspect-ratio: 1 / 1;
+    margin-bottom: 1rem;
+  }
+
+  .cardTitle {
+    font-size: 1.4rem;
+  }
+
+  .cardDescription {
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .button {
+    font-size: 0.95rem;
+    padding: 0.7rem 1.2rem;
+  }
+}
+
+@media (max-width: 768px) {
   .cardsContainer {
     flex-direction: column;
     align-items: center;
   }
 
   .card {
-    max-width: 100%;
+    width: 100%;
+    max-width: 350px;
+    height: auto; /* Permite înălțimii să fie automată */
   }
 
   .imageContainer {
-    height: 200px;
-  }
-
-  .cardTitle {
-    font-size: 1.6rem;
+    width: 140px;
+    aspect-ratio: 1 / 1;
+    margin-bottom: 1.2rem;
   }
 
   .cardDescription {
-    font-size: 0.95rem;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .gemeinden {
+    padding: 4rem 1rem;
+  }
+
+  .heading {
+    font-size: 2.2rem;
+  }
+
+  .card {
+    width: 100%;
+    max-width: 300px;
+    padding: 1.2rem 0.8rem;
+  }
+
+  .imageContainer {
+    width: 120px;
+    aspect-ratio: 1 / 1;
+    margin-bottom: 1rem;
+  }
+
+  .cardTitle {
+    font-size: 1.3rem;
+  }
+
+  .cardDescription {
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
   }
 
   .button {
-    font-size: 0.95rem;
-    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    padding: 0.6rem 1rem;
   }
 }
