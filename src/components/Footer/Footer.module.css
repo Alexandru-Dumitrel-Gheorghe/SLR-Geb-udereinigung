@@ -1,5 +1,3 @@
-/* src/components/Footer/Footer.module.css */
-
 @import "../../styles/variables.css"; /* Importă variabilele globale */
 
 /* Footer Section */
@@ -9,12 +7,14 @@
   padding: 3rem 2rem;
   font-family: var(--font-primary);
   position: relative;
+  max-width: 100%; /* Previne overflow-ul */
 }
 
 .container {
   max-width: 1200px;
   margin: 0 auto;
   text-align: center;
+  width: 100%; /* Asigură că containerul ocupă întreaga lățime */
 }
 
 /* Social Media Links */
@@ -23,6 +23,7 @@
   justify-content: center;
   gap: 2rem;
   margin-bottom: 1.5rem;
+  flex-wrap: wrap; /* Permite înfășurarea elementelor pe rânduri */
 }
 
 .icon {
@@ -34,7 +35,7 @@
 
 .icon:hover {
   color: var(--secondary-color);
-  transform: scale(1.2);
+  transform: scale(1.1); /* Reducerea scale-ului pentru a preveni overflow-ul */
 }
 
 /* Copy */

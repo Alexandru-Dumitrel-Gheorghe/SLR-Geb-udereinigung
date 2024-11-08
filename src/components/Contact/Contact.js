@@ -1,357 +1,297 @@
-// src/components/Contact/Contact.jsx
-import React, { useState } from "react";
+import React, { useState, Suspense, lazy } from "react";
 import styles from "./Contact.module.css";
-import { motion } from "framer-motion";
-import {
-  FaPhoneAlt,
-  FaEnvelope,
-  FaMapMarkerAlt,
-  FaCheckCircle,
-  FaExclamationTriangle,
-  FaSpinner,
-} from "react-icons/fa";
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
-import "leaflet/dist/leaflet.css";
-import L from "leaflet";
-import markerIconPng from "leaflet/dist/images/marker-icon.png";
+import emailjs from "emailjs-com";
+import { useForm } from "react-hook-form";
+
+// Lazy load icons for performance optimization
+const FaPhoneAlt = lazy(() =>
+  import("react-icons/fa").then((module) => ({ default: module.FaPhoneAlt }))
+);
+const FaEnvelope = lazy(() =>
+  import("react-icons/fa").then((module) => ({ default: module.FaEnvelope }))
+);
+const FaMapMarkerAlt = lazy(() =>
+  import("react-icons/fa").then((module) => ({
+    default: module.FaMapMarkerAlt,
+  }))
+);
+const FaCheckCircle = lazy(() =>
+  import("react-icons/fa").then((module) => ({ default: module.FaCheckCircle }))
+);
+const FaExclamationTriangle = lazy(() =>
+  import("react-icons/fa").then((module) => ({
+    default: module.FaExclamationTriangle,
+  }))
+);
+const FaSpinner = lazy(() =>
+  import("react-icons/fa").then((module) => ({ default: module.FaSpinner }))
+);
 
 const Contact = () => {
-  const initialFormData = {
-    anrede: "",
-    name: "",
-    email: "",
-    telefon: "",
-    nachricht: "",
-    zustimmung: false,
-  };
-
-  const [formData, setFormData] = useState(initialFormData);
-  const [submitted, setSubmitted] = useState(false);
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors, isSubmitting, isSubmitSuccessful },
+  } = useForm();
   const [errorMessage, setErrorMessage] = useState("");
-  const [isSending, setIsSending] = useState(false);
 
-  const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: type === "checkbox" ? checked : value,
-    }));
-  };
-
-  const validateForm = () => {
-    const { anrede, name, email, telefon, nachricht, zustimmung } = formData;
-    if (!anrede || !name || !email || !telefon || !nachricht || !zustimmung) {
-      return "Bitte füllen Sie alle Pflichtfelder aus.";
-    }
-    // Validare simplistă a emailului
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      return "Bitte geben Sie eine gültige E-Mail-Adresse ein.";
-    }
-    // Validare simplistă a telefonului
-    const phoneRegex = /^\+?[0-9\s-]{7,15}$/;
-    if (!phoneRegex.test(telefon)) {
-      return "Bitte geben Sie eine gültige Telefonnummer ein.";
-    }
-    return "";
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const validationError = validateForm();
-    if (validationError) {
-      setErrorMessage(validationError);
-      return;
-    }
-
-    setIsSending(true);
+  const onSubmit = async (data, e) => {
     setErrorMessage("");
-
-    // Simularea trimiterii formularului
-    setTimeout(() => {
-      // Exemplu de succes
-      setSubmitted(true);
-      setFormData(initialFormData);
-      setIsSending(false);
-    }, 2000);
+    try {
+      await emailjs.sendForm(
+        process.env.REACT_APP_EMAILJS_SERVICE_ID,
+        process.env.REACT_APP_EMAILJS_TEMPLATE_ID,
+        e.target,
+        process.env.REACT_APP_EMAILJS_USER_ID
+      );
+      reset();
+    } catch (error) {
+      console.error("Email sending error:", error);
+      setErrorMessage("Es gab einen Fehler beim Senden der Nachricht.");
+    }
   };
-
-  // Configurare marker Leaflet
-  const markerIcon = new L.Icon({
-    iconUrl: markerIconPng,
-    iconSize: [25, 41],
-    iconAnchor: [12, 41],
-  });
 
   return (
-    <section id="kontakt" className={styles.contact}>
-      <motion.div
-        className={styles.container}
-        initial={{ opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1 }}
-        viewport={{ once: true }}
-      >
-        {/* Header */}
-        <motion.div
-          className={styles.header}
-          initial={{ opacity: 0, y: -50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
+    <section
+      className={styles.contactSection}
+      aria-labelledby="contact-heading"
+    >
+      <div className={styles.background}></div>
+      <div className={styles.container}>
+        <form
+          className={styles.form}
+          onSubmit={handleSubmit(onSubmit)}
+          noValidate
+          aria-describedby="form-feedback"
         >
-          <h2 className={styles.heading}>Kontaktieren Sie uns!</h2>
+          <h2 id="contact-heading" className={styles.heading}>
+            Kontaktieren Sie uns!
+          </h2>
           <p className={styles.subheading}>
             Nehmen Sie gerne Kontakt mit uns auf. Erhalten Sie eine kostenlose
             Beratung durch unser Expertenteam.
           </p>
-        </motion.div>
 
-        {/* Content */}
-        <div className={styles.content}>
-          {/* Informații de Contact */}
-          <motion.div
-            className={styles.info}
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            viewport={{ once: true }}
-          >
-            <div className={styles.infoItem}>
-              <FaPhoneAlt className={styles.icon} aria-hidden="true" />
-              <div className={styles.infoText}>
-                <h3>Festnetz & Mobil</h3>
-                <p>
-                  <strong>Festnetz:</strong> +49 (0) 8102 / 8729001
-                  <br />
-                  <strong>Mobil:</strong> +49 (0) 152 / 28714145
-                </p>
+          {/* Contact Information */}
+          <div className={styles.info}>
+            <Suspense fallback={<div className={styles.iconPlaceholder}></div>}>
+              <div className={styles.infoItem}>
+                <FaPhoneAlt className={styles.icon} aria-hidden="true" />
+                <div className={styles.infoText}>
+                  <h3>Festnetz & Mobil</h3>
+                  <p>
+                    <strong>Festnetz:</strong> +49 (0) 8102 / 8729001
+                    <br />
+                    <strong>Mobil:</strong> +49 (0) 152 / 28714145
+                  </p>
+                </div>
               </div>
-            </div>
-            <div className={styles.infoItem}>
-              <FaEnvelope className={styles.icon} aria-hidden="true" />
-              <div className={styles.infoText}>
-                <h3>E-Mail</h3>
-                <p>
-                  <a href="mailto:kontakt@slr-gebaeudereinigung.de">
-                    kontakt@slr-gebaeudereinigung.de
-                  </a>
-                </p>
+              <div className={styles.infoItem}>
+                <FaEnvelope className={styles.icon} aria-hidden="true" />
+                <div className={styles.infoText}>
+                  <h3>E-Mail</h3>
+                  <p>
+                    <a href="mailto:kontakt@slr-gebaeudereinigung.de">
+                      kontakt@slr-gebaeudereinigung.de
+                    </a>
+                  </p>
+                </div>
               </div>
-            </div>
-            <div className={styles.infoItem}>
-              <FaMapMarkerAlt className={styles.icon} aria-hidden="true" />
-              <div className={styles.infoText}>
-                <h3>Adresse</h3>
-                <p>
-                  SLR Gebäudereinigung
-                  <br />
-                  Haringstr. 11
-                  <br />
-                  85635 Siegertsbrunn
-                </p>
+              <div className={styles.infoItem}>
+                <FaMapMarkerAlt className={styles.icon} aria-hidden="true" />
+                <div className={styles.infoText}>
+                  <h3>Adresse</h3>
+                  <p>
+                    SLR Gebäudereinigung
+                    <br />
+                    Haringstr. 11
+                    <br />
+                    85635 Siegertsbrunn
+                  </p>
+                </div>
               </div>
-            </div>
-          </motion.div>
+            </Suspense>
+          </div>
 
-          {/* Formular de Contact */}
-          <motion.form
-            className={styles.form}
-            onSubmit={handleSubmit}
-            noValidate
-            aria-describedby="form-feedback"
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            viewport={{ once: true }}
-          >
+          {/* Feedback Messages */}
+          <div id="form-feedback" aria-live="assertive">
             {errorMessage && (
-              <motion.div
-                className={styles.errorMessage}
-                role="alert"
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3 }}
-              >
-                <FaExclamationTriangle
-                  className={styles.errorIcon}
-                  aria-hidden="true"
-                />
-                <span>{errorMessage}</span>
-              </motion.div>
-            )}
-
-            {submitted && (
-              <motion.div
-                className={styles.successMessage}
-                role="status"
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.3 }}
-              >
-                <FaCheckCircle
-                  className={styles.successIcon}
-                  aria-hidden="true"
-                />
-                <p>Ihre Nachricht wurde erfolgreich gesendet!</p>
-              </motion.div>
-            )}
-
-            {!submitted && (
-              <>
-                <div className={styles.formGrid}>
-                  <div className={styles.formGroup}>
-                    <label htmlFor="anrede" className={styles.label}>
-                      Anrede
-                    </label>
-                    <select
-                      id="anrede"
-                      name="anrede"
-                      value={formData.anrede}
-                      onChange={handleChange}
-                      className={styles.input}
-                      required
-                      aria-required="true"
-                    >
-                      <option value="">-- Bitte wählen --</option>
-                      <option value="Herr">Herr</option>
-                      <option value="Frau">Frau</option>
-                      <option value="Divers">Divers</option>
-                    </select>
-                  </div>
-                  <div className={styles.formGroup}>
-                    <label htmlFor="name" className={styles.label}>
-                      Vor- und Nachname*
-                    </label>
-                    <input
-                      type="text"
-                      id="name"
-                      name="name"
-                      placeholder="Geben Sie Ihren Vor- und Nachnamen ein"
-                      value={formData.name}
-                      onChange={handleChange}
-                      required
-                      className={styles.input}
-                      aria-required="true"
-                    />
-                  </div>
-                  <div className={styles.formGroup}>
-                    <label htmlFor="email" className={styles.label}>
-                      E-Mail*
-                    </label>
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
-                      placeholder="Geben Sie eine gültige E-Mail-Adresse ein"
-                      value={formData.email}
-                      onChange={handleChange}
-                      required
-                      className={styles.input}
-                      aria-required="true"
-                    />
-                  </div>
-                  <div className={styles.formGroup}>
-                    <label htmlFor="telefon" className={styles.label}>
-                      Telefon*
-                    </label>
-                    <input
-                      type="tel"
-                      id="telefon"
-                      name="telefon"
-                      placeholder="Geben Sie eine gültige Telefonnummer an"
-                      value={formData.telefon}
-                      onChange={handleChange}
-                      required
-                      className={styles.input}
-                      aria-required="true"
-                    />
-                  </div>
-                  <div className={styles.formGroupFull}>
-                    <label htmlFor="nachricht" className={styles.label}>
-                      Nachricht*
-                    </label>
-                    <textarea
-                      id="nachricht"
-                      name="nachricht"
-                      placeholder="Geben Sie Ihre Nachricht ein!"
-                      value={formData.nachricht}
-                      onChange={handleChange}
-                      required
-                      className={styles.textarea}
-                      aria-required="true"
-                    ></textarea>
-                  </div>
-                </div>
-                <div className={styles.checkboxGroup}>
-                  <input
-                    type="checkbox"
-                    id="zustimmung"
-                    name="zustimmung"
-                    checked={formData.zustimmung}
-                    onChange={handleChange}
-                    required
-                    className={styles.checkbox}
-                    aria-required="true"
+              <div className={styles.errorMessage} role="alert">
+                <Suspense fallback={<span className={styles.errorIcon}></span>}>
+                  <FaExclamationTriangle
+                    className={styles.errorIcon}
+                    aria-hidden="true"
                   />
-                  <label htmlFor="zustimmung" className={styles.checkboxLabel}>
-                    Ich stimme zu, dass meine Angaben und Daten zur Beantwortung
-                    meiner Anfrage elektronisch erhoben und gespeichert werden.
-                  </label>
-                </div>
-                <motion.button
-                  type="submit"
-                  className={styles.submitButton}
-                  disabled={isSending}
-                  aria-disabled={isSending}
-                  whileHover={!isSending && { scale: 1.05 }}
-                  whileTap={!isSending && { scale: 0.95 }}
-                  transition={{ type: "spring", stiffness: 300 }}
-                >
-                  {isSending ? (
-                    <>
-                      <FaSpinner
-                        className={styles.spinner}
-                        aria-hidden="true"
-                      />{" "}
-                      Senden...
-                    </>
-                  ) : (
-                    "Anfrage senden"
-                  )}
-                </motion.button>
-              </>
+                </Suspense>
+                {errorMessage}
+              </div>
             )}
-          </motion.form>
-        </div>
 
-        {/* Secțiunea Hartă */}
-        <motion.div
-          className={styles.mapSection}
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-          viewport={{ once: true }}
-        >
-          <MapContainer
-            center={[48.0191, 11.7097]} // Coordonate pentru Siegertsbrunn
-            zoom={13}
-            scrollWheelZoom={false}
-            className={styles.map}
-            aria-label="Map showing the location of SLR Gebäudereinigung"
-          >
-            <TileLayer
-              attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a>'
-              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            />
-            <Marker position={[48.0191, 11.7097]} icon={markerIcon}>
-              <Popup>
-                SLR Gebäudereinigung <br /> Haringstr. 11, 85635 Siegertsbrunn
-              </Popup>
-            </Marker>
-          </MapContainer>
-        </motion.div>
-      </motion.div>
+            {isSubmitSuccessful && (
+              <div className={styles.thankYouMessage} role="status">
+                <Suspense
+                  fallback={<span className={styles.successIcon}></span>}
+                >
+                  <FaCheckCircle
+                    className={styles.successIcon}
+                    aria-hidden="true"
+                  />
+                </Suspense>
+                Vielen Dank für Ihre Nachricht! Wir werden uns bald bei Ihnen
+                melden.
+              </div>
+            )}
+          </div>
+
+          {/* Form Fields */}
+          {!isSubmitSuccessful && (
+            <div className={styles.formGrid}>
+              <div className={styles.formGroup}>
+                <label htmlFor="firstName" className={styles.label}>
+                  Vorname
+                </label>
+                <input
+                  type="text"
+                  id="firstName"
+                  name="firstName"
+                  className={`${styles.input} ${
+                    errors.firstName ? styles.inputError : ""
+                  }`}
+                  placeholder="Bitte Vornamen eingeben..."
+                  {...register("firstName", {
+                    required: "Vorname ist erforderlich.",
+                  })}
+                  aria-invalid={errors.firstName ? "true" : "false"}
+                />
+                {errors.firstName && (
+                  <span className={styles.errorText}>
+                    {errors.firstName.message}
+                  </span>
+                )}
+              </div>
+
+              <div className={styles.formGroup}>
+                <label htmlFor="lastName" className={styles.label}>
+                  Nachname
+                </label>
+                <input
+                  type="text"
+                  id="lastName"
+                  name="lastName"
+                  className={`${styles.input} ${
+                    errors.lastName ? styles.inputError : ""
+                  }`}
+                  placeholder="Bitte Nachnamen eingeben..."
+                  {...register("lastName", {
+                    required: "Nachname ist erforderlich.",
+                  })}
+                  aria-invalid={errors.lastName ? "true" : "false"}
+                />
+                {errors.lastName && (
+                  <span className={styles.errorText}>
+                    {errors.lastName.message}
+                  </span>
+                )}
+              </div>
+
+              <div className={styles.formGroup}>
+                <label htmlFor="email" className={styles.label}>
+                  E-Mail
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  className={`${styles.input} ${
+                    errors.email ? styles.inputError : ""
+                  }`}
+                  placeholder="Bitte E-Mail-Adresse eingeben..."
+                  {...register("email", {
+                    required: "E-Mail ist erforderlich.",
+                    pattern: {
+                      value: /\S+@\S+\.\S+/,
+                      message:
+                        "Bitte geben Sie eine gültige E-Mail-Adresse ein.",
+                    },
+                  })}
+                  aria-invalid={errors.email ? "true" : "false"}
+                />
+                {errors.email && (
+                  <span className={styles.errorText}>
+                    {errors.email.message}
+                  </span>
+                )}
+              </div>
+
+              <div className={styles.formGroup}>
+                <label htmlFor="phoneNumber" className={styles.label}>
+                  Telefonnummer
+                </label>
+                <input
+                  type="tel"
+                  id="phoneNumber"
+                  name="phoneNumber"
+                  className={`${styles.input} ${
+                    errors.phoneNumber ? styles.inputError : ""
+                  }`}
+                  placeholder="Bitte Telefonnummer eingeben..."
+                  {...register("phoneNumber", {
+                    required: "Telefonnummer ist erforderlich.",
+                  })}
+                  aria-invalid={errors.phoneNumber ? "true" : "false"}
+                />
+                {errors.phoneNumber && (
+                  <span className={styles.errorText}>
+                    {errors.phoneNumber.message}
+                  </span>
+                )}
+              </div>
+
+              <div className={styles.formGroupFull}>
+                <label htmlFor="message" className={styles.label}>
+                  Ihre Nachricht
+                </label>
+                <textarea
+                  id="message"
+                  name="message"
+                  className={`${styles.textarea} ${
+                    errors.message ? styles.inputError : ""
+                  }`}
+                  placeholder="Bitte Nachricht eingeben..."
+                  {...register("message", {
+                    required: "Nachricht ist erforderlich.",
+                  })}
+                  aria-invalid={errors.message ? "true" : "false"}
+                ></textarea>
+                {errors.message && (
+                  <span className={styles.errorText}>
+                    {errors.message.message}
+                  </span>
+                )}
+              </div>
+            </div>
+          )}
+
+          {/* Submit Button */}
+          {!isSubmitSuccessful && (
+            <button
+              type="submit"
+              className={styles.submitButton}
+              disabled={isSubmitting}
+              aria-busy={isSubmitting}
+            >
+              <Suspense fallback={<span className={styles.spinner}></span>}>
+                {isSubmitting ? (
+                  <FaSpinner className={styles.spinner} aria-hidden="true" />
+                ) : (
+                  "Absenden"
+                )}
+              </Suspense>
+            </button>
+          )}
+        </form>
+      </div>
     </section>
   );
 };

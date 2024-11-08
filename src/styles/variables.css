@@ -1,14 +1,21 @@
-/* variables.css */
-
 :root {
   --primary-color: #004080; /* Albastru închis */
   --secondary-color: #ffcc00; /* Galben */
+  --background-color: #f5f5f5; /* Culoare de fundal generală */
   --light-text-color: #ffffff;
   --dark-text-color: #333333;
+  --text-color: #555555;
+  --text-color-dark: #222222;
+  --border-color: #dddddd;
   --navbar-height: 80px;
   --transition-speed: 0.3s;
+  --border-radius: 8px;
   --font-primary: "Roboto", sans-serif;
   --font-secondary: "Open Sans", sans-serif;
+  --font-size-base: 1rem;
+  --font-size-small: 0.875rem;
+  --font-size-medium: 1rem;
+  --font-size-large: 1.5rem;
 }
 
 /* Importă Google Fonts */

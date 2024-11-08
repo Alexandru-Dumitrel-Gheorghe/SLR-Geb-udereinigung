@@ -11,10 +11,11 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: var(--font-family, Arial, sans-serif);
+  font-family: var(--font-family, var(--font-primary, Arial, sans-serif));
   background-color: var(--background-color, #ffffff);
   color: var(--text-color, #333333);
   scroll-behavior: smooth;
+  overflow-x: hidden; /* Previne derularea orizontală */
 }
 
 /* Stilizare scrollbar pentru Webkit (Chrome, Safari) */
@@ -84,6 +85,8 @@ body {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 15px;
+  display: flex;
+  flex-wrap: wrap; /* Permite înfășurarea elementelor */
 }
 
 /* Navbar stiluri pentru mobile */
@@ -101,6 +104,7 @@ body {
   align-items: center;
   justify-content: center;
   color: var(--light-text-color);
+  width: 100%; /* Asigură că header-ul nu depășește viewport-ul */
 }
 
 /* Stiluri pentru buton */
@@ -112,6 +116,8 @@ body {
   border-radius: 6px;
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s ease;
+  max-width: 100%; /* Previne depășirea containerului */
+  display: inline-block; /* Ajută la gestionarea dimensiunilor */
 }
 
 .button:hover {
@@ -125,4 +131,13 @@ body {
     width: 100%;
     padding: 12px;
   }
+}
+
+/* Responsivitatea imaginilor și media */
+img,
+video,
+iframe {
+  max-width: 100%;
+  height: auto;
+  display: block; /* Elimină spațiul gol sub imagini */
 }

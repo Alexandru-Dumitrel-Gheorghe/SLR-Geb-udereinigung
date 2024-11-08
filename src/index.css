@@ -1,0 +1,10 @@
+/* Stiluri generale pentru corp */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-family, var(--font-primary, Arial, sans-serif));
+  background-color: var(--background-color, #ffffff);
+  color: var(--text-color, #333333);
+  scroll-behavior: smooth;
+  overflow-x: hidden; /* Previne derularea orizontală */
+}
