@@ -7,6 +7,7 @@ import Mission from "./components/Mission/Mission";
 import Services from "./components/Services/Services";
 import Gallery from "./components/Gallery/Gallery";
 import Gemeinden from "./components/Gemeinden/Gemeinden"; // Importă componenta Gemeinden
+import Testimonials from "./components/Testimonials/Testimonials";
 import Contact from "./components/Contact/Contact";
 import Footer from "./components/Footer/Footer";
 import ScrollToTop from "./components/scrolltotop/ScrollToTop";
@@ -22,6 +23,7 @@ function App() {
       <Services />
       <Gallery />
       <Gemeinden /> {/* Include componenta Gemeinden */}
+      <Testimonials />
       <Contact />
       <Footer />
       <ScrollToTop />
