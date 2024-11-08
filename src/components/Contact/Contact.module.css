@@ -1,4 +1,5 @@
-@import "../../styles/variables.css";
+/* Importă Google Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Open+Sans:wght@400;600&display=swap");
 
 /* Global Box-Sizing */
 *,
@@ -11,11 +12,24 @@
 .contactSection {
   position: relative;
   padding: 60px 20px;
-  background-color: var(--background-color);
-  font-family: var(--font-primary);
+  background-color: #f5f5f5; /* Culoare de fundal generală */
+  font-family: "Roboto", sans-serif;
   overflow: hidden;
   margin-top: 80px;
-  transition: background-color var(--transition-speed) ease;
+  transition: background-color 0.3s ease;
+  animation: fadeIn 1s ease-out;
+}
+
+/* Fade-In Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Background Element */
@@ -27,13 +41,14 @@
   height: 300px;
   background: linear-gradient(
     135deg,
-    var(--primary-color),
-    var(--secondary-color)
-  );
+    #004080,
+    #ffcc00
+  ); /* Gradient albastru închis și galben */
   z-index: -1;
   border-bottom-left-radius: 50% 20%;
   border-bottom-right-radius: 50% 20%;
   animation: backgroundAnimation 15s infinite alternate;
+  opacity: 0.8;
 }
 
 @keyframes backgroundAnimation {
@@ -50,11 +65,25 @@
   max-width: 900px;
   margin: 0 auto;
   padding: 50px 30px;
-  background-color: rgba(255, 255, 255, 0.95);
-  border-radius: var(--border-radius);
+  background-color: rgba(255, 255, 255, 0.95); /* Alb semi-transparent */
+  border-radius: 8px;
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
-  transition: box-shadow var(--transition-speed) ease,
-    transform var(--transition-speed) ease;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  min-height: 500px;
+  overflow: hidden;
+  animation: slideIn 1s ease-out;
+}
+
+/* Slide-In Animation */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 .container:hover {
@@ -67,30 +96,37 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  max-height: 100%;
+  overflow: hidden;
 }
 
 /* Heading */
 .heading {
-  font-size: var(--font-size-large);
-  color: var(--primary-color);
+  font-size: 1.5rem;
+  color: #004080; /* Albastru închis */
   margin-bottom: 15px;
   text-align: center;
   text-transform: uppercase;
   letter-spacing: 1px;
-  transition: color var(--transition-speed) ease;
+  transition: color 0.3s ease;
 }
 
 .heading:hover {
-  color: var(--secondary-color);
+  color: #ffcc00; /* Galben */
 }
 
 /* Subheading */
 .subheading {
-  font-size: var(--font-size-medium);
-  color: var(--text-color);
+  font-size: 1rem;
+  color: #555555; /* Culoare text general */
   margin-bottom: 40px;
   text-align: center;
   line-height: 1.6;
+  transition: color 0.3s ease;
+}
+
+.subheading:hover {
+  color: #333333; /* Text mai închis */
 }
 
 /* Contact Information */
@@ -100,6 +136,40 @@
   flex-wrap: wrap;
   margin-bottom: 40px;
   width: 100%;
+  animation: bounceIn 1s ease-out;
+}
+
+/* Bounce-In Animation */
+@keyframes bounceIn {
+  0%,
+  20%,
+  40%,
+  60%,
+  80%,
+  100% {
+    transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+  }
+  0% {
+    opacity: 0;
+    transform: scale3d(0.3, 0.3, 0.3);
+  }
+  20% {
+    transform: scale3d(1.1, 1.1, 1.1);
+  }
+  40% {
+    transform: scale3d(0.9, 0.9, 0.9);
+  }
+  60% {
+    opacity: 1;
+    transform: scale3d(1.03, 1.03, 1.03);
+  }
+  80% {
+    transform: scale3d(0.97, 0.97, 0.97);
+  }
+  100% {
+    opacity: 1;
+    transform: scale3d(1, 1, 1);
+  }
 }
 
 .infoItem {
@@ -108,47 +178,56 @@
   margin-bottom: 20px;
   width: 30%;
   min-width: 220px;
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 8px;
+  padding: 10px;
 }
 
 .infoItem:hover {
   transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 .icon {
-  color: var(--primary-color);
+  color: #004080; /* Albastru închis */
   font-size: 1.8rem;
   margin-right: 12px;
   flex-shrink: 0;
-  transition: color var(--transition-speed) ease;
+  transition: color 0.3s ease, transform 0.3s ease;
 }
 
 .infoItem:hover .icon {
-  color: var(--secondary-color);
+  color: #ffcc00; /* Galben */
+  transform: scale(1.1);
 }
 
 .infoText h3 {
   margin: 0 0 6px 0;
-  font-size: var(--font-size-small);
-  color: var(--text-color-dark);
+  font-size: 0.875rem;
+  color: #222222; /* Culoare text mai închis */
   text-transform: capitalize;
+  transition: color 0.3s ease;
+}
+
+.infoText h3:hover {
+  color: #004080; /* Albastru închis */
 }
 
 .infoText p {
   margin: 0;
-  font-size: var(--font-size-small);
-  color: var(--dark-text-color);
+  font-size: 0.875rem;
+  color: #333333; /* Text mai închis */
   line-height: 1.5;
 }
 
 .infoText a {
-  color: var(--primary-color);
+  color: #004080; /* Albastru închis */
   text-decoration: none;
-  transition: color var(--transition-speed) ease;
+  transition: color 0.3s ease, text-decoration 0.3s ease;
 }
 
 .infoText a:hover {
-  color: var(--secondary-color);
+  color: #ffcc00; /* Galben */
   text-decoration: underline;
 }
 
@@ -160,29 +239,47 @@
   align-items: center;
   justify-content: center;
   padding: 15px 20px;
-  border-radius: var(--border-radius);
+  border-radius: 8px;
   margin-bottom: 30px;
   font-weight: bold;
-  transition: background-color var(--transition-speed) ease,
-    color var(--transition-speed) ease;
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
 }
 
 .errorMessage {
-  background-color: rgba(220, 53, 69, 0.1);
-  color: #dc3545;
+  background-color: rgba(220, 53, 69, 0.1); /* Roșu deschis */
+  color: #dc3545; /* Roșu */
   border: 1px solid #dc3545;
+  transform: translateY(-10px);
 }
 
 .thankYouMessage {
-  background-color: rgba(40, 167, 69, 0.1);
-  color: #28a745;
+  background-color: rgba(40, 167, 69, 0.1); /* Verde deschis */
+  color: #28a745; /* Verde */
   border: 1px solid #28a745;
+  transform: translateY(-10px);
+}
+
+.errorMessage:hover,
+.thankYouMessage:hover {
+  transform: translateY(0);
 }
 
 .errorIcon,
 .successIcon {
   margin-right: 10px;
   font-size: 1.2rem;
+  animation: bounce 0.5s infinite;
+}
+
+/* Bounce Animation for Icons */
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
 }
 
 .spinner {
@@ -213,23 +310,27 @@
 /* Labels */
 .label {
   margin-bottom: 6px;
-  font-size: var(--font-size-small);
-  color: var(--text-color-dark);
+  font-size: 0.875rem;
+  color: #222222; /* Culoare text mai închis */
   font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.label:hover {
+  color: #004080; /* Albastru închis */
 }
 
 /* Inputs and Textarea */
 .input,
 .textarea {
-  padding: 14px 18px;
-  border: 1px solid var(--border-color);
-  border-radius: var(--border-radius);
-  font-size: var(--font-size-small);
-  transition: border-color var(--transition-speed) ease,
-    box-shadow var(--transition-speed) ease;
+  padding: 12px 16px;
+  border: 1px solid #dddddd; /* Culoare de border */
+  border-radius: 8px;
+  font-size: 0.875rem;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
   background-color: #fff;
-  color: var(--dark-text-color);
-  font-family: var(--font-primary);
+  color: #333333; /* Text mai închis */
+  font-family: "Roboto", sans-serif;
 }
 
 .input::placeholder,
@@ -239,19 +340,21 @@
 
 .input:focus,
 .textarea:focus {
-  border-color: var(--primary-color);
+  border-color: #004080; /* Albastru închis */
   outline: none;
   box-shadow: 0 0 8px rgba(0, 123, 255, 0.3);
+  transform: scale(1.02);
 }
 
 .inputError {
-  border-color: #dc3545;
+  border-color: #dc3545; /* Roșu pentru erori */
 }
 
 .errorText {
-  color: #dc3545;
-  font-size: var(--font-size-small);
+  color: #dc3545; /* Roșu pentru text de eroare */
+  font-size: 0.875rem;
   margin-top: 5px;
+  animation: fadeIn 0.5s ease-out;
 }
 
 /* Textarea */
@@ -263,31 +366,31 @@
 /* Submit Button */
 .submitButton {
   margin-top: 35px;
-  padding: 14px 35px;
-  background-color: var(--primary-color);
-  color: #fff;
+  padding: 14px 30px;
+  background-color: #004080; /* Albastru închis */
+  color: #ffffff; /* Text alb */
   border: none;
-  border-radius: var(--border-radius);
+  border-radius: 8px;
   font-size: 1rem;
   cursor: pointer;
-  transition: background-color var(--transition-speed) ease, transform 0.2s ease;
+  transition: background-color 0.3s ease, transform 0.2s ease;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .submitButton:hover:not(:disabled) {
-  background-color: var(--secondary-color);
+  background-color: #ffcc00; /* Galben */
   transform: translateY(-3px);
 }
 
 .submitButton:disabled {
-  background-color: #a1a1a1;
+  background-color: #a1a1a1; /* Gri pentru stare dezactivată */
   cursor: not-allowed;
 }
 
 .submitButton:focus {
-  outline: 2px solid var(--primary-color);
+  outline: 2px solid #004080; /* Albastru închis */
   outline-offset: 2px;
 }
 
@@ -325,38 +428,49 @@
 
   .container {
     padding: 40px 20px;
+    min-height: 450px;
   }
 
   .heading {
-    font-size: var(--font-size-medium);
+    font-size: 1rem;
   }
 
   .subheading {
-    font-size: var(--font-size-small);
+    font-size: 0.875rem;
   }
 
   .submitButton {
     width: 100%;
     padding: 14px;
   }
-}
 
-@media (max-width: 480px) {
-  .heading {
-    font-size: var(--font-size-base);
-  }
-
-  .subheading {
-    font-size: calc(var(--font-size-small) - 0.1rem);
+  .input:focus,
+  .textarea:focus {
+    box-shadow: 0 0 6px rgba(0, 123, 255, 0.2);
   }
 
   .input,
   .textarea {
-    font-size: calc(var(--font-size-small) - 0.1rem);
+    padding: 12px 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .heading {
+    font-size: 1rem;
+  }
+
+  .subheading {
+    font-size: 0.775rem;
+  }
+
+  .input,
+  .textarea {
+    font-size: 0.775rem;
   }
 
   .submitButton {
-    font-size: var(--font-size-small);
+    font-size: 0.875rem;
     padding: 12px;
   }
 }

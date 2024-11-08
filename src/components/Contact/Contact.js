@@ -76,41 +76,45 @@ const Contact = () => {
           {/* Contact Information */}
           <div className={styles.info}>
             <Suspense fallback={<div className={styles.iconPlaceholder}></div>}>
-              <div className={styles.infoItem}>
-                <FaPhoneAlt className={styles.icon} aria-hidden="true" />
-                <div className={styles.infoText}>
-                  <h3>Festnetz & Mobil</h3>
-                  <p>
-                    <strong>Festnetz:</strong> +49 (0) 8102 / 8729001
-                    <br />
-                    <strong>Mobil:</strong> +49 (0) 152 / 28714145
-                  </p>
+              {[
+                {
+                  icon: <FaPhoneAlt />,
+                  title: "Festnetz & Mobil",
+                  content: [
+                    "Festnetz: +49 (0) 8102 / 8729001",
+                    "Mobil: +49 (0) 152 / 28714145",
+                  ],
+                },
+                {
+                  icon: <FaEnvelope />,
+                  title: "E-Mail",
+                  content: ["kontakt@slr-gebaeudereinigung.de"],
+                },
+                {
+                  icon: <FaMapMarkerAlt />,
+                  title: "Adresse",
+                  content: [
+                    "SLR Gebäudereinigung",
+                    "Haringstr. 11",
+                    "85635 Siegertsbrunn",
+                  ],
+                },
+              ].map((item, index) => (
+                <div key={index} className={styles.infoItem}>
+                  {item.icon}
+                  <div className={styles.infoText}>
+                    <h3>{item.title}</h3>
+                    <p>
+                      {item.content.map((text, i) => (
+                        <span key={i}>
+                          {text}
+                          <br />
+                        </span>
+                      ))}
+                    </p>
+                  </div>
                 </div>
-              </div>
-              <div className={styles.infoItem}>
-                <FaEnvelope className={styles.icon} aria-hidden="true" />
-                <div className={styles.infoText}>
-                  <h3>E-Mail</h3>
-                  <p>
-                    <a href="mailto:kontakt@slr-gebaeudereinigung.de">
-                      kontakt@slr-gebaeudereinigung.de
-                    </a>
-                  </p>
-                </div>
-              </div>
-              <div className={styles.infoItem}>
-                <FaMapMarkerAlt className={styles.icon} aria-hidden="true" />
-                <div className={styles.infoText}>
-                  <h3>Adresse</h3>
-                  <p>
-                    SLR Gebäudereinigung
-                    <br />
-                    Haringstr. 11
-                    <br />
-                    85635 Siegertsbrunn
-                  </p>
-                </div>
-              </div>
+              ))}
             </Suspense>
           </div>
 
@@ -147,107 +151,62 @@ const Contact = () => {
           {/* Form Fields */}
           {!isSubmitSuccessful && (
             <div className={styles.formGrid}>
-              <div className={styles.formGroup}>
-                <label htmlFor="firstName" className={styles.label}>
-                  Vorname
-                </label>
-                <input
-                  type="text"
-                  id="firstName"
-                  name="firstName"
-                  className={`${styles.input} ${
-                    errors.firstName ? styles.inputError : ""
-                  }`}
-                  placeholder="Bitte Vornamen eingeben..."
-                  {...register("firstName", {
-                    required: "Vorname ist erforderlich.",
-                  })}
-                  aria-invalid={errors.firstName ? "true" : "false"}
-                />
-                {errors.firstName && (
-                  <span className={styles.errorText}>
-                    {errors.firstName.message}
-                  </span>
-                )}
-              </div>
-
-              <div className={styles.formGroup}>
-                <label htmlFor="lastName" className={styles.label}>
-                  Nachname
-                </label>
-                <input
-                  type="text"
-                  id="lastName"
-                  name="lastName"
-                  className={`${styles.input} ${
-                    errors.lastName ? styles.inputError : ""
-                  }`}
-                  placeholder="Bitte Nachnamen eingeben..."
-                  {...register("lastName", {
-                    required: "Nachname ist erforderlich.",
-                  })}
-                  aria-invalid={errors.lastName ? "true" : "false"}
-                />
-                {errors.lastName && (
-                  <span className={styles.errorText}>
-                    {errors.lastName.message}
-                  </span>
-                )}
-              </div>
-
-              <div className={styles.formGroup}>
-                <label htmlFor="email" className={styles.label}>
-                  E-Mail
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  className={`${styles.input} ${
-                    errors.email ? styles.inputError : ""
-                  }`}
-                  placeholder="Bitte E-Mail-Adresse eingeben..."
-                  {...register("email", {
-                    required: "E-Mail ist erforderlich.",
-                    pattern: {
-                      value: /\S+@\S+\.\S+/,
-                      message:
-                        "Bitte geben Sie eine gültige E-Mail-Adresse ein.",
-                    },
-                  })}
-                  aria-invalid={errors.email ? "true" : "false"}
-                />
-                {errors.email && (
-                  <span className={styles.errorText}>
-                    {errors.email.message}
-                  </span>
-                )}
-              </div>
-
-              <div className={styles.formGroup}>
-                <label htmlFor="phoneNumber" className={styles.label}>
-                  Telefonnummer
-                </label>
-                <input
-                  type="tel"
-                  id="phoneNumber"
-                  name="phoneNumber"
-                  className={`${styles.input} ${
-                    errors.phoneNumber ? styles.inputError : ""
-                  }`}
-                  placeholder="Bitte Telefonnummer eingeben..."
-                  {...register("phoneNumber", {
-                    required: "Telefonnummer ist erforderlich.",
-                  })}
-                  aria-invalid={errors.phoneNumber ? "true" : "false"}
-                />
-                {errors.phoneNumber && (
-                  <span className={styles.errorText}>
-                    {errors.phoneNumber.message}
-                  </span>
-                )}
-              </div>
-
+              {[
+                {
+                  id: "firstName",
+                  label: "Vorname",
+                  type: "text",
+                  placeholder: "Bitte Vornamen eingeben...",
+                  required: true,
+                },
+                {
+                  id: "lastName",
+                  label: "Nachname",
+                  type: "text",
+                  placeholder: "Bitte Nachnamen eingeben...",
+                  required: true,
+                },
+                {
+                  id: "email",
+                  label: "E-Mail",
+                  type: "email",
+                  placeholder: "Bitte E-Mail-Adresse eingeben...",
+                  required: true,
+                },
+                {
+                  id: "phoneNumber",
+                  label: "Telefonnummer",
+                  type: "tel",
+                  placeholder: "Bitte Telefonnummer eingeben...",
+                  required: true,
+                },
+              ].map(({ id, label, type, placeholder, required }) => (
+                <div key={id} className={styles.formGroup}>
+                  <label htmlFor={id} className={styles.label}>
+                    {label}
+                  </label>
+                  <input
+                    type={type}
+                    id={id}
+                    name={id}
+                    className={`${styles.input} ${
+                      errors[id] ? styles.inputError : ""
+                    }`}
+                    placeholder={placeholder}
+                    {...register(id, {
+                      required: required
+                        ? `${label} ist erforderlich.`
+                        : undefined,
+                    })}
+                    aria-invalid={errors[id] ? "true" : "false"}
+                  />
+                  {errors[id] && (
+                    <span className={styles.errorText}>
+                      {errors[id].message}
+                    </span>
+                  )}
+                </div>
+              ))}
               <div className={styles.formGroupFull}>
                 <label htmlFor="message" className={styles.label}>
                   Ihre Nachricht
