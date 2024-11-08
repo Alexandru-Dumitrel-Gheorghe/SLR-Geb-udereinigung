@@ -83,7 +83,7 @@
 
 .cardDescription {
   font-size: 1rem;
-  color: var(--text-color);
+  color: var(--primary-color);
   line-height: 1.6;
   margin-bottom: 1.5rem;
 }
