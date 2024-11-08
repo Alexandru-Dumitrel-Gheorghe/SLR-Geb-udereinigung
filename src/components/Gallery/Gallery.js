@@ -1,3 +1,4 @@
+// src/components/Gallery/Gallery.js
 import React, { useState } from "react";
 import styles from "./Gallery.module.css";
 import { motion, AnimatePresence } from "framer-motion";
@@ -66,14 +67,7 @@ const Gallery = () => {
             >
               <img src={image.src} alt={image.alt} className={styles.image} />
               <div className={styles.overlay}>
-                <motion.div
-                  className={styles.text}
-                  initial={{ opacity: 0 }}
-                  whileHover={{ opacity: 1 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  {image.alt}
-                </motion.div>
+                <div className={styles.text}>{image.alt}</div>
               </div>
             </motion.div>
           ))}
@@ -95,7 +89,7 @@ const Gallery = () => {
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.8, opacity: 0 }}
               transition={{ duration: 0.3 }}
-              onClick={(e) => e.stopPropagation()}
+              onClick={(e) => e.stopPropagation()} // Previne închiderea modalului când se face clic în interior
             >
               <button className={styles.closeButton} onClick={closeModal}>
                 <FaTimes />

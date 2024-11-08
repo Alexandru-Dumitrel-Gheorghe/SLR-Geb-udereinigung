@@ -24,18 +24,26 @@ body::-webkit-scrollbar {
 
 body::-webkit-scrollbar-track {
   background: var(--background-color, #ffffff);
-  border-radius: 6px;
+  border-radius: 10px;
 }
 
 body::-webkit-scrollbar-thumb {
-  background-color: var(--primary-color, #0056b3); /* Culoare primară */
-  border-radius: 6px;
+  background: linear-gradient(
+    135deg,
+    var(--primary-color, #0056b3),
+    #004494
+  ); /* Gradient */
+  border-radius: 10px;
   border: 3px solid var(--background-color, #ffffff);
-  transition: background-color 0.3s ease;
+  transition: background 0.3s ease;
 }
 
 body::-webkit-scrollbar-thumb:hover {
-  background-color: #004494; /* O nuanță mai închisă a culorii primare */
+  background: linear-gradient(
+    135deg,
+    #004494,
+    #003366
+  ); /* Nuanță mai închisă la hover */
 }
 
 /* Stilizare scrollbar pentru Firefox */
@@ -70,7 +78,7 @@ body {
   }
 }
 
-/* Alte stiluri responsiv */
+/* Container responsive */
 .container {
   width: 100%;
   max-width: 1200px;
@@ -78,6 +86,7 @@ body {
   padding: 0 15px;
 }
 
+/* Navbar stiluri pentru mobile */
 @media (max-width: 768px) {
   .navbar {
     height: 60px;
@@ -94,19 +103,20 @@ body {
   color: var(--light-text-color);
 }
 
-/* Alte componente stilizate */
+/* Stiluri pentru buton */
 .button {
   background-color: var(--secondary-color);
   color: var(--text-color);
   padding: 10px 20px;
   border: none;
-  border-radius: 4px;
+  border-radius: 6px;
   cursor: pointer;
-  transition: background-color var(--transition-speed);
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .button:hover {
-  background-color: darken(var(--secondary-color), 10%);
+  background-color: #003366; /* Culoare mai închisă la hover */
+  transform: scale(1.05); /* Efect de scalare la hover */
 }
 
 /* Media query pentru buton */

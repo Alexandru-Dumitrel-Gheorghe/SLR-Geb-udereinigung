@@ -1,8 +1,9 @@
-@import "../../styles/variables.css";
+/* src/components/Gallery/Gallery.module.css */
+@import "../../styles/variables.css"; /* Importă variabilele globale */
 
 .gallery {
   padding: 4rem 2rem;
-  background: linear-gradient(135deg, #f9fafb, #e3e8ed);
+  background-color: var(--background-color);
 }
 
 .container {
@@ -16,7 +17,6 @@
   color: var(--primary-color);
   margin-bottom: 3rem;
   position: relative;
-  font-family: var(--font-secondary);
 }
 
 .heading::after {
@@ -38,8 +38,8 @@
 .card {
   position: relative;
   overflow: hidden;
-  border-radius: 12px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   cursor: pointer;
   transition: transform var(--transition-speed) ease,
     box-shadow var(--transition-speed) ease;
@@ -49,7 +49,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.4s ease;
+  transition: transform var(--transition-speed) ease;
 }
 
 .card:hover .image {
@@ -59,11 +59,11 @@
 .overlay {
   position: absolute;
   bottom: 0;
-  background: rgba(0, 86, 179, 0.85);
+  background: rgba(0, 86, 179, 0.8); /* Culoarea fundalului overlay-ului */
   color: #fff;
   width: 100%;
   transform: translateY(100%);
-  transition: transform 0.4s ease;
+  transition: transform var(--transition-speed) ease;
   padding: 1rem;
   text-align: center;
 }
@@ -96,9 +96,9 @@
   max-width: 90%;
   max-height: 90%;
   background-color: #fff;
-  border-radius: 12px;
+  border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 
 .modalImage {
@@ -114,7 +114,7 @@
   background: rgba(0, 0, 0, 0.5);
   border: none;
   color: #fff;
-  padding: 0.6rem;
+  padding: 0.5rem 1rem;
   cursor: pointer;
   border-radius: 50%;
   font-size: 1.2rem;
@@ -152,7 +152,7 @@
   color: var(--text-color);
 }
 
-/* Responsivitate */
+/* Responsivitate pentru Modal */
 @media (max-width: 768px) {
   .heading {
     font-size: 2rem;
@@ -169,7 +169,7 @@
   .closeButton,
   .prevButton,
   .nextButton {
-    padding: 0.4rem;
+    padding: 0.3rem 0.6rem;
     font-size: 1rem;
   }
 
