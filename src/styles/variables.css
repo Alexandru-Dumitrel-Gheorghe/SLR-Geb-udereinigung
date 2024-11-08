@@ -16,6 +16,10 @@
   --font-size-small: 0.875rem;
   --font-size-medium: 1rem;
   --font-size-large: 1.5rem;
+
+  /* Stări suplimentare */
+  --error-color: #dc3545;
+  --success-color: #28a745;
 }
 
 /* Importă Google Fonts */

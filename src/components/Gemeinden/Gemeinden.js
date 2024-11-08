@@ -1,8 +1,12 @@
 // src/components/Gemeinden/Gemeinden.js
-import React from "react";
+import React, { Suspense, lazy } from "react";
 import styles from "./Gemeinden.module.css";
 import { motion } from "framer-motion";
-import { FaArrowRight } from "react-icons/fa";
+
+// Lazy load icons for performance optimization
+const FaArrowRight = lazy(() =>
+  import("react-icons/fa").then((module) => ({ default: module.FaArrowRight }))
+);
 
 const Gemeinden = () => {
   const gemeinden = [
@@ -22,10 +26,15 @@ const Gemeinden = () => {
         "Gemeinde Oberschleißheim setzt auf unsere Expertise in der Gebäudereinigung, um höchste Standards in Sauberkeit zu gewährleisten.",
       link: "#contact",
     },
+    // Adaugă mai multe obiecte dacă este necesar
   ];
 
   return (
-    <section id="gemeinden" className={styles.gemeinden}>
+    <section
+      id="gemeinden"
+      className={styles.gemeinden}
+      aria-labelledby="gemeinden-heading"
+    >
       <motion.div
         className={styles.container}
         initial={{ opacity: 0, y: 50 }}
@@ -33,7 +42,9 @@ const Gemeinden = () => {
         transition={{ duration: 1 }}
         viewport={{ once: true }}
       >
-        <h2 className={styles.heading}>Unsere Gemeinden</h2>
+        <h2 id="gemeinden-heading" className={styles.heading}>
+          Unsere Gemeinden
+        </h2>
         <div className={styles.cardsContainer}>
           {gemeinden.map((gemeinde, index) => (
             <motion.div
@@ -50,13 +61,23 @@ const Gemeinden = () => {
                   src={gemeinde.src}
                   alt={gemeinde.alt}
                   className={styles.image}
+                  loading="lazy"
                 />
               </div>
               <div className={styles.content}>
                 <h3 className={styles.cardTitle}>{gemeinde.name}</h3>
                 <p className={styles.cardDescription}>{gemeinde.description}</p>
-                <a href={gemeinde.link} className={styles.button}>
-                  Kontaktieren Sie uns <FaArrowRight className={styles.icon} />
+                <a
+                  href={gemeinde.link}
+                  className={styles.button}
+                  aria-label={`Kontaktieren Sie uns für ${gemeinde.name}`}
+                >
+                  Kontaktieren Sie uns
+                  <Suspense
+                    fallback={<span className={styles.iconPlaceholder}></span>}
+                  >
+                    <FaArrowRight className={styles.icon} aria-hidden="true" />
+                  </Suspense>
                 </a>
               </div>
             </motion.div>
