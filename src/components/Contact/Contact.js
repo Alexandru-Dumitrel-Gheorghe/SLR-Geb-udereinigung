@@ -1,4 +1,4 @@
-// Contact.jsx
+// src/components/Contact/Contact.jsx
 import React, { useState } from "react";
 import styles from "./Contact.module.css";
 import { motion } from "framer-motion";
@@ -85,12 +85,19 @@ const Contact = () => {
 
   return (
     <section id="kontakt" className={styles.contact}>
-      <div className={styles.container}>
+      <motion.div
+        className={styles.container}
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1 }}
+        viewport={{ once: true }}
+      >
+        {/* Header */}
         <motion.div
           className={styles.header}
           initial={{ opacity: 0, y: -50 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
           <h2 className={styles.heading}>Kontaktieren Sie uns!</h2>
@@ -100,9 +107,16 @@ const Contact = () => {
           </p>
         </motion.div>
 
+        {/* Content */}
         <div className={styles.content}>
           {/* Informații de Contact */}
-          <div className={styles.info}>
+          <motion.div
+            className={styles.info}
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            viewport={{ once: true }}
+          >
             <div className={styles.infoItem}>
               <FaPhoneAlt className={styles.icon} aria-hidden="true" />
               <div className={styles.infoText}>
@@ -138,14 +152,18 @@ const Contact = () => {
                 </p>
               </div>
             </div>
-          </div>
+          </motion.div>
 
           {/* Formular de Contact */}
-          <form
+          <motion.form
             className={styles.form}
             onSubmit={handleSubmit}
             noValidate
             aria-describedby="form-feedback"
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            viewport={{ once: true }}
           >
             {errorMessage && (
               <motion.div
@@ -281,11 +299,14 @@ const Contact = () => {
                     meiner Anfrage elektronisch erhoben und gespeichert werden.
                   </label>
                 </div>
-                <button
+                <motion.button
                   type="submit"
                   className={styles.submitButton}
                   disabled={isSending}
                   aria-disabled={isSending}
+                  whileHover={!isSending && { scale: 1.05 }}
+                  whileTap={!isSending && { scale: 0.95 }}
+                  transition={{ type: "spring", stiffness: 300 }}
                 >
                   {isSending ? (
                     <>
@@ -298,10 +319,10 @@ const Contact = () => {
                   ) : (
                     "Anfrage senden"
                   )}
-                </button>
+                </motion.button>
               </>
             )}
-          </form>
+          </motion.form>
         </div>
 
         {/* Secțiunea Hartă */}
@@ -330,7 +351,7 @@ const Contact = () => {
             </Marker>
           </MapContainer>
         </motion.div>
-      </div>
+      </motion.div>
     </section>
   );
 };
