@@ -1,10 +1,14 @@
 /* src/components/Footer/Footer.module.css */
+
 @import "../../styles/variables.css"; /* Importă variabilele globale */
 
+/* Footer Section */
 .footer {
   background-color: var(--primary-color);
   color: var(--light-text-color);
-  padding: 2rem 1rem;
+  padding: 3rem 2rem;
+  font-family: var(--font-primary);
+  position: relative;
 }
 
 .container {
@@ -13,34 +17,77 @@
   text-align: center;
 }
 
+/* Social Media Links */
 .socialMedia {
   display: flex;
   justify-content: center;
-  gap: 1.5rem;
-  margin-bottom: 1rem;
+  gap: 2rem;
+  margin-bottom: 1.5rem;
 }
 
 .icon {
   color: var(--light-text-color);
-  font-size: 1.5rem;
-  transition: color var(--transition-speed) ease;
+  font-size: 1.8rem;
+  transition: color var(--transition-speed) ease,
+    transform var(--transition-speed) ease;
 }
 
 .icon:hover {
   color: var(--secondary-color);
+  transform: scale(1.2);
 }
 
+/* Copy */
 .copy {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Credit */
+.credit {
   font-size: 0.9rem;
 }
 
-/* Media Queries pentru Responsivitate */
+.credit a {
+  color: var(--secondary-color);
+  text-decoration: none;
+  transition: color var(--transition-speed) ease;
+}
+
+.credit a:hover {
+  color: var(--primary-color);
+  text-decoration: underline;
+}
+
+/* Responsive Design */
 @media (max-width: 768px) {
   .icon {
-    font-size: 1.2rem;
+    font-size: 1.5rem;
+  }
+
+  .copy {
+    font-size: 0.9rem;
+  }
+
+  .credit {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer {
+    padding: 2rem 1rem;
+  }
+
+  .icon {
+    font-size: 1.3rem;
   }
 
   .copy {
     font-size: 0.8rem;
+  }
+
+  .credit {
+    font-size: 0.7rem;
   }
 }
