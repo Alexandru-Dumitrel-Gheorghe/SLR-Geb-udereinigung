@@ -56,9 +56,9 @@
 }
 
 .imageContainer {
-  /* Eliminăm width și height fixe */
-  aspect-ratio: 1 / 1; /* Asigurăm că containerul este pătrat */
-  width: 150px; /* Ajustăm lățimea după necesități */
+  /* Asigurăm că containerul este pătrat */
+  aspect-ratio: 1 / 1;
+  width: 150px; /* Poate fi ajustat după necesități */
   border-radius: 50%;
   overflow: hidden;
   margin-bottom: 1.5rem;

@@ -3,61 +3,102 @@
 @import "../../styles/variables.css";
 
 .testimonials {
-  padding: 4rem 1.5rem;
-  background: linear-gradient(135deg, #003366, #0073e6);
-  color: var(--light-text-color);
+  padding: 5rem 2rem;
+  background: linear-gradient(135deg, var(--background-color), #e3e8ed);
+  color: var(--dark-text-color);
   font-family: var(--font-primary);
   text-align: center;
-  border-top: 8px solid var(--secondary-color);
-  border-bottom: 8px solid var(--secondary-color);
+  position: relative;
+  overflow: hidden;
+}
+
+.container {
+  max-width: 1300px;
+  margin: 0 auto;
 }
 
 .heading {
-  font-size: 2.8rem;
-  color: var(--secondary-color);
-  margin-bottom: 3rem;
+  font-size: 3rem;
+  color: var(--primary-color);
+  margin-bottom: 4rem;
+  position: relative;
   font-family: var(--font-secondary);
+  font-weight: 700;
 }
 
 .heading::after {
   content: "";
   width: 100px;
-  height: 4px;
+  height: 5px;
   background-color: var(--secondary-color);
   display: block;
-  margin: 0.5rem auto 0;
+  margin: 1rem auto 0;
   border-radius: 2px;
 }
 
 .cardsContainer {
   display: flex;
-  flex-wrap: wrap;
-  gap: 1.5rem;
   justify-content: center;
+  gap: 3rem;
+  flex-wrap: wrap;
 }
 
 .card {
   background-color: #ffffff;
   color: var(--dark-text-color);
-  border-radius: 15px;
+  border-radius: 25px;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
   padding: 2rem;
-  max-width: 300px;
-  flex: 1 1 280px;
+  max-width: 350px;
+  flex: 1 1 300px;
+  position: relative;
+  overflow: hidden;
   transition: transform var(--transition-speed),
     box-shadow var(--transition-speed);
 }
 
 .card:hover {
   transform: translateY(-10px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+}
+
+.quoteLeft,
+.quoteRight {
+  position: absolute;
+  font-size: 2rem;
+  color: var(--secondary-color);
+  opacity: 0.3;
+}
+
+.quoteLeft {
+  top: 10px;
+  left: 10px;
+}
+
+.quoteRight {
+  bottom: 10px;
+  right: 10px;
+}
+
+.comment {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  font-style: italic;
+  color: #555555;
+  margin: 2rem 0;
+  position: relative;
+  z-index: 1;
+}
+
+.footer {
+  text-align: center;
 }
 
 .name {
-  font-size: 1.3rem;
+  font-size: 1.4rem;
   font-weight: 600;
   color: var(--primary-color);
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.3rem;
 }
 
 .source {
@@ -68,44 +109,89 @@
 
 .rating {
   color: var(--secondary-color);
-  margin-bottom: 1rem;
+  display: flex;
+  justify-content: center;
+  gap: 0.2rem;
 }
 
 .star {
-  font-size: 1.2rem;
-}
-
-.comment {
   font-size: 1rem;
-  line-height: 1.5;
-  font-style: italic;
-  color: #666666;
 }
 
-/* Responsivitate */
-@media (max-width: 768px) {
+@media (max-width: 992px) {
   .heading {
-    font-size: 2.4rem;
+    font-size: 2.5rem;
+  }
+
+  .cardsContainer {
+    gap: 2rem;
   }
 
   .card {
-    max-width: 100%;
-    margin: 0.5rem;
+    max-width: 300px;
+    padding: 1.8rem;
+  }
+
+  .comment {
+    font-size: 1rem;
+  }
+
+  .name {
+    font-size: 1.3rem;
+  }
+
+  .button {
+    font-size: 0.95rem;
+    padding: 0.7rem 1.2rem;
   }
 }
 
-@media (max-width: 576px) {
-  .heading {
-    font-size: 2rem;
-  }
-
+@media (max-width: 768px) {
   .cardsContainer {
     flex-direction: column;
     align-items: center;
   }
 
   .card {
-    max-width: 90%;
-    margin: 0.5rem 0;
+    max-width: 100%;
+    padding: 1.5rem;
+  }
+
+  .comment {
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .testimonials {
+    padding: 4rem 1rem;
+  }
+
+  .heading {
+    font-size: 2.2rem;
+  }
+
+  .cardsContainer {
+    gap: 1.5rem;
+  }
+
+  .card {
+    padding: 1.2rem;
+  }
+
+  .comment {
+    font-size: 0.95rem;
+  }
+
+  .name {
+    font-size: 1.2rem;
+  }
+
+  .rating {
+    gap: 0.1rem;
+  }
+
+  .star {
+    font-size: 0.9rem;
   }
 }
