@@ -14,37 +14,67 @@ const Hero = () => {
       <div className={styles.content}>
         <motion.div
           className={styles.textSection}
-          initial={{ opacity: 0, x: -50 }}
-          animate={{ opacity: 1, x: 0 }}
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
         >
-          <h1 className={styles.title}>SLR Gebäudereinigung</h1>
-          <p className={styles.subtitle}>
+          <motion.h1
+            className={styles.title}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1, delay: 0.5 }}
+          >
+            SLR Gebäudereinigung
+          </motion.h1>
+          <motion.p
+            className={styles.subtitle}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1, delay: 1 }}
+          >
             Professionelle Reinigungsdienstleistungen für Ihr Zuhause und Ihr
             Unternehmen
-          </p>
+          </motion.p>
           <div className={styles.buttons}>
-            <a href="#leistungen" className={styles.primaryButton}>
+            <motion.a
+              href="#leistungen"
+              className={styles.primaryButton}
+              whileHover={{ scale: 1.1 }}
+              transition={{ type: "spring", stiffness: 300 }}
+            >
               Unsere Leistungen
-            </a>
-            <a href="#kontakt" className={styles.secondaryButton}>
+            </motion.a>
+            <motion.a
+              href="#kontakt"
+              className={styles.secondaryButton}
+              whileHover={{ scale: 1.1 }}
+              transition={{ type: "spring", stiffness: 300 }}
+            >
               Kontaktieren Sie uns
-            </a>
+            </motion.a>
           </div>
         </motion.div>
         <motion.div
           className={styles.contactSection}
           initial={{ opacity: 0, x: 50 }}
           animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 1, delay: 0.5 }}
+          transition={{ duration: 1, delay: 1.5 }}
         >
-          <div className={styles.contactItem}>
+          <motion.div
+            className={styles.contactItem}
+            whileHover={{ scale: 1.05 }}
+            transition={{ duration: 0.3 }}
+          >
             <FaPhoneAlt className={styles.icon} />
             <a href="tel:+4915228714145" className={styles.contactLink}>
               +49 (0) 152 / 28714145
             </a>
-          </div>
-          <div className={styles.contactItem}>
+          </motion.div>
+          <motion.div
+            className={styles.contactItem}
+            whileHover={{ scale: 1.05 }}
+            transition={{ duration: 0.3 }}
+          >
             <FaEnvelope className={styles.icon} />
             <a
               href="mailto:kontakt@slr-gebaeudereinigung.de"
@@ -52,13 +82,17 @@ const Hero = () => {
             >
               kontakt@slr-gebaeudereinigung.de
             </a>
-          </div>
-          <div className={styles.contactItem}>
+          </motion.div>
+          <motion.div
+            className={styles.contactItem}
+            whileHover={{ scale: 1.05 }}
+            transition={{ duration: 0.3 }}
+          >
             <FaMapMarkerAlt className={styles.icon} />
             <span className={styles.contactText}>
               Haringstr. 11 85635 Siegertsbrunn
             </span>
-          </div>
+          </motion.div>
         </motion.div>
       </div>
       <motion.div

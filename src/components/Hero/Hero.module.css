@@ -1,11 +1,18 @@
 /* src/components/Hero/Hero.module.css */
 
 :root {
+  --primary-color: #004080;
+  --secondary-color: #ffcc00;
+  --light-text-color: #ffffff;
+  --dark-text-color: #333333;
+  --navbar-height: 80px;
+  --transition-speed: 0.3s;
+  --font-primary: "Roboto", sans-serif;
+  --font-secondary: "Open Sans", sans-serif;
   --gold-color: #ffd700;
   --gold-color-dark: #e5c100;
-  --texxt-color: #ffffff;
+  --text-color: #ffffff;
   --background-overlay: rgba(0, 0, 0, 0.5);
-  --font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 .hero {
@@ -17,9 +24,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--texxt-color);
+  color: var(--text-color);
   overflow: hidden;
-  font-family: var(--font-family);
+  font-family: var(--font-primary);
 }
 
 .overlay {
@@ -46,7 +53,6 @@
   gap: 50px;
 }
 
-/* Asigură stivuirea verticală a conținutului pe ecrane mai mici */
 @media (max-width: 992px) {
   .content {
     flex-direction: column;
@@ -62,13 +68,12 @@
 }
 
 .title {
-  /* Implementarea tipografiei fluide cu clamp, dimensiuni reduse */
   font-size: clamp(1.5rem, 4vw + 0.5rem, 3rem);
   margin-bottom: 20px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 2px;
-  word-break: break-word; /* Previne suprapunerea */
+  word-break: break-word;
 }
 
 .subtitle {
@@ -199,21 +204,13 @@
   background-color: var(--gold-color);
 }
 
-/* Design Responsiv */
-
-/* Ecrane mari */
 @media (max-width: 1200px) {
   .content {
     width: 95%;
   }
 }
 
-/* Tablete și mai mici */
 @media (max-width: 992px) {
-  .title {
-    /* Opțional: ajustări suplimentare dacă este necesar */
-  }
-
   .subtitle {
     font-size: 1.3rem;
   }
@@ -238,18 +235,12 @@
   }
 }
 
-/* Dispozitive mobile */
 @media (max-width: 768px) {
-  .title {
-    /* Gestionat de clamp */
-  }
-
   .subtitle {
     font-size: 1.2rem;
   }
 }
 
-/* Dispozitive extra mici */
 @media (max-width: 576px) {
   .title {
     font-size: clamp(1.3rem, 3.5vw + 0.5rem, 1.8rem);
