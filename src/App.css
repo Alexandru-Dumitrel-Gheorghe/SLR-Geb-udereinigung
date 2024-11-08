@@ -24,12 +24,14 @@ body::-webkit-scrollbar {
 
 body::-webkit-scrollbar-track {
   background: var(--background-color, #ffffff);
+  border-radius: 6px;
 }
 
 body::-webkit-scrollbar-thumb {
-  background-color: var(--primary-color, #0056b3);
+  background-color: var(--primary-color, #0056b3); /* Culoare primară */
   border-radius: 6px;
   border: 3px solid var(--background-color, #ffffff);
+  transition: background-color 0.3s ease;
 }
 
 body::-webkit-scrollbar-thumb:hover {

@@ -27,15 +27,25 @@ const Mission = () => {
   return (
     <section id="mission" className={styles.mission}>
       <div className={styles.container}>
-        <h2 className={styles.heading}>Unsere Mission und Werte</h2>
+        <motion.h2
+          className={styles.heading}
+          initial={{ opacity: 0, y: -50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+        >
+          Unsere Mission und Werte
+        </motion.h2>
+
         <div className={styles.cards}>
           {missionData.map((item, index) => (
             <motion.div
               key={index}
               className={styles.card}
               initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
+              whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.2, duration: 0.6 }}
+              viewport={{ once: true }}
               whileHover={{
                 scale: 1.1,
                 boxShadow: "0px 20px 50px rgba(0,0,0,0.3)",

@@ -16,6 +16,7 @@ const About = () => {
         >
           Über uns
         </motion.h2>
+
         <div className={styles.content}>
           <motion.div
             className={styles.imageContainer}
@@ -30,6 +31,7 @@ const About = () => {
               className={styles.image}
             />
           </motion.div>
+
           <motion.div
             className={styles.text}
             initial={{ opacity: 0, x: 50 }}
@@ -59,6 +61,7 @@ const About = () => {
               von Ihnen zu hören und stehen Ihnen gerne für eine unverbindliche
               Beratung zur Verfügung.
             </p>
+
             <div className={styles.contactInfo}>
               <div className={styles.contactItem}>
                 <FaPhone className={styles.icon} />
@@ -71,6 +74,7 @@ const About = () => {
             </div>
           </motion.div>
         </div>
+
         <motion.div
           className={styles.additionalInfo}
           initial={{ opacity: 0 }}

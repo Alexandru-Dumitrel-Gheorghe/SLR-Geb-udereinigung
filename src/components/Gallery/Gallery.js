@@ -66,7 +66,14 @@ const Gallery = () => {
             >
               <img src={image.src} alt={image.alt} className={styles.image} />
               <div className={styles.overlay}>
-                <div className={styles.text}>{image.alt}</div>
+                <motion.div
+                  className={styles.text}
+                  initial={{ opacity: 0 }}
+                  whileHover={{ opacity: 1 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  {image.alt}
+                </motion.div>
               </div>
             </motion.div>
           ))}
